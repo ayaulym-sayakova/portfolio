@@ -24,7 +24,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root{
     --paper:#FFFFFF;
@@ -41,8 +41,8 @@
     --on-dark:#FFFFFF;
     --on-dark-soft:#C8E3F8;
 
-    --f-display:"Bricolage Grotesque", system-ui, sans-serif;
-    --f-body:"Instrument Sans", system-ui, sans-serif;
+    --f-display:"Bricolage Grotesque", "Manrope", system-ui, sans-serif;
+    --f-body:"Instrument Sans", "Manrope", system-ui, sans-serif;
     --f-mono:"JetBrains Mono", ui-monospace, monospace;
 
     --wrap:1180px;
@@ -275,7 +275,7 @@
   .contact h2{ font-family:var(--f-display); font-weight:700; font-size:clamp(2.4rem,1.8rem+4vw,5.5rem); line-height:0.98; letter-spacing:-0.03em; margin:16px 0 8px; }
   .contact h2 em{ font-style:normal; color:var(--accent-2); }
   .contact .sub{ color:var(--on-dark-soft); max-width:44ch; margin:0 0 34px; font-size:1.1rem; }
-  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
   .clink{
     display:inline-flex; align-items:center; gap:10px; font-family:var(--f-mono);
     font-size:0.82rem; font-weight:500; padding:14px 20px; border-radius:100px;
@@ -477,6 +477,20 @@
     .contact h2{ font-size:2.15rem; }
   }
 
+  /* ---------- language switcher ---------- */
+  .lang{ display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line); border-radius:100px; background:#f4faff; }
+  .lang button{ font-family:var(--f-mono); font-size:.68rem; font-weight:600; letter-spacing:.04em; color:var(--ink-soft); background:transparent; border:0; border-radius:100px; padding:5px 10px; cursor:pointer; transition:background .2s ease, color .2s ease; }
+  .lang button:hover{ color:var(--accent-ink); }
+  .lang button[aria-pressed="true"]{ background:var(--accent); color:#fff; }
+  .lang button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:600px){ .lang button{ padding:5px 7px; font-size:.62rem; } }
+  @media (max-width:430px){ .topnav .pill{ display:none; } }
+
+  /* longer Cyrillic words: relax the width caps used for the English headings */
+  html:not([lang="en"]) .hero h1{ max-width:none; }
+  html:not([lang="en"]) .section-head h2{ max-width:22ch; }
+  @media (max-width:600px){ html:not([lang="en"]) .section-head h2{ max-width:none; } }
+
   /* ---------- reveal ---------- */
   [data-reveal]{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
   [data-reveal].in{ opacity:1; transform:none; }
@@ -495,12 +509,16 @@
 
   <!-- TOP BAR -->
   <div class="topbar" id="topbar">
-    <a href="#top" class="brand"><span class="dot"></span>AYAULYM SAYAKOVA</a>
+    <a href="#top" class="brand"><span class="dot"></span><span data-i18n="brand">AYAULYM SAYAKOVA</span></a>
     <nav class="topnav">
-      <a href="#work">Work</a>
-      <a href="#projects">Projects</a>
-      <a href="#toolkit">Skills</a>
-      <a href="#contact" class="pill">Contact</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#toolkit" data-i18n="nav.skills">Skills</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="kk" aria-pressed="false">KAZ</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RUS</button>
+      </div>
+      <a href="#contact" class="pill" data-i18n="nav.contact">Contact</a>
     </nav>
   </div>
 
@@ -510,22 +528,21 @@
     <header class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="avail" data-reveal><span class="live"></span>Open to Creative Producer roles</span>
-          <span class="eyebrow" data-reveal data-d="1">Creative Producer · Performance Creative</span>
-          <h1 data-reveal data-d="1">Ayaulym<br><span>Sayakova</span></h1>
-          <p class="hero-lead" data-reveal data-d="2">I turn insights into scroll-stopping UGC, AI video and static ads — then use performance data to make the next version stronger.</p>
+          <span class="eyebrow" data-reveal data-d="1" data-i18n="hero.eyebrow">Creative Producer · Performance Creative</span>
+          <h1 data-reveal data-d="1" data-i18n="hero.h1">Ayaulym<br><span>Sayakova</span></h1>
+          <p class="hero-lead" data-reveal data-d="2" data-i18n="hero.lead">I turn insights into scroll-stopping UGC, AI video and static ads — then use performance data to make the next version stronger.</p>
           <div class="role" data-reveal data-d="2">
-            <span>UGC ads</span>
-            <span>AI video</span>
-            <span>Creative testing</span>
+            <span data-i18n="hero.r1">UGC ads</span>
+            <span data-i18n="hero.r2">AI video</span>
+            <span data-i18n="hero.r3">Creative testing</span>
           </div>
           <div class="cta-row" data-reveal data-d="3">
-            <a class="btn primary" href="#work">
-              See selected work
+            <a class="btn primary" href="#toolkit">
+              <span data-i18n="hero.cta1">See my skills</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a class="btn ghost" href="#contact">
-              Let's talk
+              <span data-i18n="hero.cta2">Let's talk</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -537,165 +554,21 @@
     <section class="section" id="about">
       <div class="wrap">
         <div class="section-head" data-reveal>
-          <h2>Where creative meets performance</h2>
-          <span class="idx mono">01 / About</span>
+          <h2 data-i18n="about.h2">Where creative meets performance</h2>
+          <span class="idx mono" data-i18n="about.idx">01 / About</span>
         </div>
         <div class="about-grid">
           <div class="about-copy" data-reveal data-d="1">
-            <p>I'm a creative producer with a <span class="hl">Computer Science background</span>. I bring creative judgment and analytical thinking into the same workflow.</p>
-            <p>My experience in Meta user acquisition helps me build <span class="hl">UGC, static and AI-generated ads</span> around clear hooks, structured tests and the metrics that guide the next iteration.</p>
+            <p data-i18n="about.p1">I'm a creative producer with a <span class="hl">Computer Science background</span>. I bring creative judgment and analytical thinking into the same workflow.</p>
+            <p data-i18n="about.p2">My experience in Meta user acquisition helps me build <span class="hl">UGC, static and AI-generated ads</span> around clear hooks, structured tests and the metrics that guide the next iteration.</p>
           </div>
           <dl class="facts" data-reveal data-d="2">
-            <div class="fact"><dt>Based in</dt><dd>Astana, Kazakhstan<small>Remote-friendly</small></dd></div>
-            <div class="fact"><dt>Focus</dt><dd>Performance Creative<small>UGC · AI video · static</small></dd></div>
-            <div class="fact"><dt>Platforms</dt><dd>Meta Ads<small>UA &amp; creative testing</small></dd></div>
-            <div class="fact"><dt>Education</dt><dd>B.Sc. Computer Science<small>Nazarbayev University · 2026</small></dd></div>
-            <div class="fact"><dt>Languages</dt><dd>English · Kazakh<small>Professional · Native</small></dd></div>
+            <div class="fact"><dt data-i18n="dt.loc">Based in</dt><dd data-i18n="fact.loc">Astana, Kazakhstan<small>Remote-friendly</small></dd></div>
+            <div class="fact"><dt data-i18n="dt.focus">Focus</dt><dd data-i18n="fact.focus">Performance Creative<small>UGC · AI video · static</small></dd></div>
+            <div class="fact"><dt data-i18n="dt.plat">Platforms</dt><dd data-i18n="fact.plat">Meta Ads<small>UA &amp; creative testing</small></dd></div>
+            <div class="fact"><dt data-i18n="dt.edu">Education</dt><dd data-i18n="fact.edu">B.Sc. Computer Science<small>Nazarbayev University · 2026</small></dd></div>
+            <div class="fact"><dt data-i18n="dt.lang">Languages</dt><dd data-i18n="fact.lang">English · Kazakh<small>Professional · Native</small></dd></div>
           </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- WORK -->
-    <section class="section section-soft" id="work">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <h2>Selected work</h2>
-          <span class="idx mono">02 / Portfolio</span>
-        </div>
-        <div class="work-grid">
-
-          <!-- Card 1: UGC video -->
-          <article class="card" data-reveal>
-            <div class="ph v916">
-              <video class="media" controls playsinline preload="metadata" aria-label="UGC video ad">
-                <source src="portfolio-assets/ugc.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="card-body">
-              <div class="spec"><span class="t">UGC</span><span class="t">Video</span><span class="t">Meta</span></div>
-              <h3>UGC video ad</h3>
-              <p>Hook-led creator ad designed for cold traffic.</p>
-            </div>
-          </article>
-
-          <!-- Card 2: AI video -->
-          <article class="card" data-reveal data-d="1">
-            <div class="ph v916">
-              <video class="media" controls playsinline preload="metadata" aria-label="AI-generated video ad">
-                <source src="portfolio-assets/aigen.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="card-body">
-              <div class="spec"><span class="t">AI Video</span><span class="t">Krea · Kling · Veo</span></div>
-              <h3>AI-generated video ad</h3>
-              <p>AI-assisted concept and edit built for fast iteration.</p>
-            </div>
-          </article>
-
-          <!-- Card 3: static -->
-          <article class="card" data-reveal data-d="2">
-            <div class="ph sq">
-              <img class="media contain" src="portfolio-assets/static.jpg" alt="Static ad concept" loading="lazy" />
-            </div>
-            <div class="card-body">
-              <div class="spec"><span class="t">Static</span><span class="t">Concept</span></div>
-              <h3>Static ad concept</h3>
-              <p>Clear message, focused claim and direct CTA.</p>
-            </div>
-          </article>
-
-          <!-- Card 4: A/B batch -->
-          <article class="card half" data-reveal>
-            <div class="ph">
-              <div class="vs">
-                <div class="cell">
-                  <video controls muted playsinline preload="metadata" aria-label="Creative test variant 1">
-                    <source src="portfolio-assets/variant1.mp4" type="video/mp4" />
-                  </video>
-                  <span class="lbl">Variant 1</span>
-                </div>
-                <div class="mid">vs</div>
-                <div class="cell win">
-                  <video controls muted playsinline preload="metadata" aria-label="Creative test variant 2">
-                    <source src="portfolio-assets/variant2.mp4" type="video/mp4" />
-                  </video>
-                  <span class="lbl">Variant 2</span>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="spec"><span class="t">A/B Test</span><span class="t">Creative Batch</span><span class="t">Iteration</span></div>
-              <h3>Creative testing batch</h3>
-              <p>Competing hooks and angles built as a structured test.</p>
-            </div>
-          </article>
-
-          <!-- Card 5: hooks / research (half) -->
-          <article class="card half gallery-card" data-reveal data-d="1" role="button" tabindex="0" aria-haspopup="dialog" data-gallery-title="Hooks, angles &amp; competitor research" data-gallery-images="portfolio-assets/screenshot1.png">
-            <div class="ph wide43">
-              <img class="media" src="portfolio-assets/screenshot1.png" alt="Hooks, angles and competitor research board" loading="lazy" />
-            </div>
-            <div class="card-body">
-              <div class="spec"><span class="t">Research</span><span class="t">Briefs</span></div>
-              <h3>Hooks, angles &amp; competitor research</h3>
-              <p>Competitor teardowns, angle maps and actionable creative briefs.</p>
-              <a class="proj-link figma-link" href="https://www.figma.com/board/p0vkOvGw3DoCcGLhWp2ubZ/Marketing-Research?node-id=0-1&amp;t=n3QovdiGC3nLYgr4-1" target="_blank" rel="noopener">Open live Figma board ↗</a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section-head" data-reveal>
-          <h2>Beyond ads</h2>
-          <span class="idx mono">03 / Projects</span>
-        </div>
-        <div class="proj-grid">
-
-          <article class="proj" data-reveal role="button" tabindex="0" aria-haspopup="dialog" data-gallery-title="AI-YM" data-gallery-images="portfolio-assets/aiym1.png|portfolio-assets/aiym2.png|portfolio-assets/aiym3.png">
-            <div class="ph sq">
-              <img class="media" src="portfolio-assets/aiym1.png" alt="AI-YM project preview" loading="lazy" />
-            </div>
-            <div class="proj-meta">
-              <span class="when">2025 – 2026 · iOS</span>
-              <h3>AI-YM</h3>
-              <p>Accessible sign-language learning app. UI and promotional visuals.</p>
-              <div class="proj-links">
-                <a class="proj-link" href="https://ai-ym.kz/en" target="_blank" rel="noopener">Website <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-                <a class="proj-link" href="https://apps.apple.com/ru/app/ai-ym/id6762342793" target="_blank" rel="noopener">iOS App <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-              </div>
-            </div>
-          </article>
-
-          <article class="proj" data-reveal data-d="1" role="button" tabindex="0" aria-haspopup="dialog" data-gallery-title="DeepDive" data-gallery-images="portfolio-assets/deepdive.png">
-            <div class="ph sq">
-              <img class="media" src="portfolio-assets/deepdive.png" alt="DeepDive project preview" loading="lazy" />
-            </div>
-            <div class="proj-meta">
-              <span class="when">2025 · Android</span>
-              <h3>DeepDive</h3>
-              <p>Mobile game created at GameDev Center. Game assets and visual direction.</p>
-              <a class="proj-link" href="https://gamedevcenter.itch.io/deep-dive" target="_blank" rel="noopener">Play on itch.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-            </div>
-          </article>
-
-          <article class="proj" data-reveal data-d="2" role="button" tabindex="0" aria-haspopup="dialog" data-gallery-title="Decentrathon 4.0" data-gallery-images="portfolio-assets/decentra1.png|portfolio-assets/decentra2.png">
-            <div class="ph sq">
-              <img class="media" src="portfolio-assets/decentra1.png" alt="Decentrathon 4.0 project preview" loading="lazy" />
-            </div>
-            <div class="proj-meta">
-              <span class="when">2025 · Nationwide</span>
-              <h3>Decentrathon 4.0</h3>
-              <p>Visual system for a nationwide hackathon across 20 cities.</p>
-              <span class="proj-link" style="color:var(--ink-soft)">Case study on request</span>
-            </div>
-          </article>
-
         </div>
       </div>
     </section>
@@ -704,33 +577,33 @@
     <section class="section section-soft" id="toolkit">
       <div class="wrap">
         <div class="section-head" data-reveal>
-          <h2>Capabilities &amp; tools</h2>
-          <span class="idx mono">04 / Skills</span>
+          <h2 data-i18n="skills.h2">Capabilities &amp; tools</h2>
+          <span class="idx mono" data-i18n="skills.idx">02 / Skills</span>
         </div>
         <div class="kit">
           <div class="kit-group" data-reveal>
-            <h4>Performance <span>UA</span></h4>
+            <h4 data-i18n="kit.perf">Performance <span>UA</span></h4>
             <div class="chips">
               <span class="chip">Meta Ads Manager</span>
-              <span class="chip">Creative testing</span>
-              <span class="chip">A/B testing</span>
-              <span class="chip">Campaign optimization</span>
-              <span class="chip">User acquisition</span>
+              <span class="chip" data-i18n="c.ct">Creative testing</span>
+              <span class="chip" data-i18n="c.ab">A/B testing</span>
+              <span class="chip" data-i18n="c.opt">Campaign optimization</span>
+              <span class="chip" data-i18n="c.ua">User acquisition</span>
             </div>
           </div>
           <div class="kit-group" data-reveal data-d="1">
-            <h4>Creative <span>Production</span></h4>
+            <h4 data-i18n="kit.creative">Creative <span>Production</span></h4>
             <div class="chips">
-              <span class="chip">Competitor research</span>
-              <span class="chip">Hooks &amp; angles</span>
+              <span class="chip" data-i18n="c.comp">Competitor research</span>
+              <span class="chip" data-i18n="c.hooks">Hooks &amp; angles</span>
               <span class="chip">CTAs</span>
-              <span class="chip">Creative briefs</span>
-              <span class="chip">Static &amp; video concepts</span>
-              <span class="chip">Iteration</span>
+              <span class="chip" data-i18n="c.briefs">Creative briefs</span>
+              <span class="chip" data-i18n="c.concepts">Static &amp; video concepts</span>
+              <span class="chip" data-i18n="c.iter">Iteration</span>
             </div>
           </div>
           <div class="kit-group" data-reveal>
-            <h4>Design &amp; Video <span>Craft</span></h4>
+            <h4 data-i18n="kit.design">Design &amp; Video <span>Craft</span></h4>
             <div class="chips">
               <span class="chip">Figma</span>
               <span class="chip">Adobe Photoshop</span>
@@ -740,7 +613,7 @@
             </div>
           </div>
           <div class="kit-group" data-reveal data-d="1">
-            <h4>AI &amp; Analytics <span>Stack</span></h4>
+            <h4 data-i18n="kit.ai">AI &amp; Analytics <span>Stack</span></h4>
             <div class="chips">
               <span class="chip">Krea AI</span>
               <span class="chip">Kling</span>
@@ -759,13 +632,12 @@
     <!-- CONTACT -->
     <section class="contact" id="contact">
       <div class="wrap">
-        <span class="eyebrow" data-reveal>Get in touch</span>
-        <h2 data-reveal data-d="1">Let's make something<br><em>worth watching.</em></h2>
-        <p class="sub" data-reveal data-d="2">Open to Creative Producer and Performance Creative opportunities.</p>
+        <span class="eyebrow" data-reveal data-i18n="contact.eyebrow">Get in touch</span>
+        <h2 data-reveal data-d="1" data-i18n="contact.h2">Let's make something<br><em>worth watching.</em></h2>
         <div class="contact-links" data-reveal data-d="2">
           <a class="clink solid" href="mailto:ayaulym.sayakova13@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg>
-            Email me
+            <span data-i18n="contact.email">Email me</span>
           </a>
           <a class="clink" href="https://www.linkedin.com/in/ayaulym-sayakova13/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg>
@@ -781,37 +653,13 @@
 
     <footer>
       <div class="wrap">
-        <span>© 2026 Ayaulym Sayakova — Creative Producer</span>
-        <span>Astana, Kazakhstan · <a href="#top">Back to top ↑</a></span>
+        <span data-i18n="footer.l">© 2026 Ayaulym Sayakova — Creative Producer</span>
+        <span data-i18n="footer.r">Astana, Kazakhstan · <a href="#top">Back to top ↑</a></span>
       </div>
     </footer>
 
   </main>
 
-  <dialog class="gallery-dialog" id="project-gallery" aria-labelledby="gallery-title">
-    <div class="gallery-shell">
-      <div class="gallery-top">
-        <div>
-          <span class="eyebrow">Project gallery</span>
-          <h2 id="gallery-title">Project</h2>
-        </div>
-        <button class="gallery-close" id="gallery-close" type="button" aria-label="Close gallery">×</button>
-      </div>
-
-      <div class="gallery-stage">
-        <img id="gallery-image" alt="" />
-      </div>
-
-      <div class="gallery-controls" id="gallery-controls">
-        <button class="gallery-arrow" id="gallery-prev" type="button" aria-label="Previous image">← Previous</button>
-        <div class="gallery-status">
-          <span class="gallery-counter" id="gallery-counter">1 / 4</span>
-          <div class="gallery-dots" id="gallery-dots" aria-label="Choose gallery image"></div>
-        </div>
-        <button class="gallery-arrow" id="gallery-next" type="button" aria-label="Next image">Next →</button>
-      </div>
-    </div>
-  </dialog>
 
 <script>
   // Top bar shadow on scroll
@@ -820,78 +668,159 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 
-  // Project gallery
-  const gallery = document.getElementById('project-gallery');
-  const galleryTitle = document.getElementById('gallery-title');
-  const galleryImage = document.getElementById('gallery-image');
-  const galleryControls = document.getElementById('gallery-controls');
-  const galleryCounter = document.getElementById('gallery-counter');
-  const galleryDots = document.getElementById('gallery-dots');
-  let galleryIndex = 0;
-  let activeProject = null;
-  let galleryImages = [];
+  // Language switcher (EN / KAZ / RUS)
+  const LANGS = ['en', 'kk', 'ru'];
+  const ALIAS = { kaz:'kk', rus:'ru' };
+  const TR = {
+    kk: {
+      'meta.title': `Аяулым Саякова — Креатив-продюсер`,
+      'meta.desc': `Аяулым Саякова — креатив-продюсер және Performance Creative. Конверсияға арналған UGC және AI бейнежарнама.`,
+      'meta.ogdesc': `Креатив-продюсер және Performance Creative: UGC, AI-бейне және креативтерді тестілеу.`,
+      'brand': `АЯУЛЫМ САЯКОВА`,
+      'nav.about': `Мен туралы`,
+      'nav.skills': `Дағдылар`,
+      'nav.contact': `Байланыс`,
+      'hero.eyebrow': `Креатив-продюсер · Performance Creative`,
+      'hero.h1': `Аяулым<br><span>Саякова</span>`,
+      'hero.lead': `Инсайттарды скроллды тоқтататын UGC, AI-бейне және статикалық жарнамаға айналдырамын, содан соң нәтиже деректері арқылы келесі нұсқаны одан да күшті жасаймын.`,
+      'hero.r1': `UGC жарнама`,
+      'hero.r2': `AI-бейне`,
+      'hero.r3': `Креативтерді тестілеу`,
+      'hero.cta1': `Дағдыларымды көру`,
+      'hero.cta2': `Сөйлесейік`,
+      'about.h2': `Креатив пен перформанс түйісетін жер`,
+      'about.idx': `01 / Мен туралы`,
+      'about.p1': `Мен <span class="hl">Computer Science саласында білімі бар</span> креатив-продюсермін. Шығармашылық көзқарас пен аналитикалық ойлауды бір жұмыс процесіне біріктіремін.`,
+      'about.p2': `Meta арқылы қолданушыларды тарту тәжірибем нақты хуктарға, құрылымдалған тесттерге және келесі итерацияны бағыттайтын метрикаларға сүйенетін <span class="hl">UGC, статикалық және AI жасаған жарнамаларды</span> құруға көмектеседі.`,
+      'dt.loc': `Тұрғылықты жері`,
+      'fact.loc': `Астана, Қазақстан<small>Қашықтан жұмысқа дайын</small>`,
+      'dt.focus': `Бағыты`,
+      'fact.focus': `Performance Creative<small>UGC · AI-бейне · статика</small>`,
+      'dt.plat': `Платформалар`,
+      'fact.plat': `Meta Ads<small>UA және креативтерді тестілеу</small>`,
+      'dt.edu': `Білімі`,
+      'fact.edu': `B.Sc. Computer Science<small>Назарбаев Университеті · 2026</small>`,
+      'dt.lang': `Тілдер`,
+      'fact.lang': `Ағылшын · Қазақ<small>Кәсіби · Ана тілі</small>`,
+      'skills.h2': `Дағдылар мен құралдар`,
+      'skills.idx': `02 / Дағдылар`,
+      'kit.perf': `Перформанс <span>UA</span>`,
+      'kit.creative': `Креатив <span>Продакшн</span>`,
+      'kit.design': `Дизайн және бейне <span>Шеберлік</span>`,
+      'kit.ai': `AI және аналитика <span>Стек</span>`,
+      'c.ct': `Креативтерді тестілеу`,
+      'c.ab': `A/B тестілеу`,
+      'c.opt': `Кампанияны оңтайландыру`,
+      'c.ua': `Қолданушыларды тарту`,
+      'c.comp': `Бәсекелестерді зерттеу`,
+      'c.hooks': `Хуктар мен ракурстар`,
+      'c.briefs': `Креатив брифтер`,
+      'c.concepts': `Статикалық және бейне концепциялар`,
+      'c.iter': `Итерациялар`,
+      'contact.eyebrow': `Байланысқа шығу`,
+      'contact.h2': `Көруге тұрарлық<br><em>бір нәрсе жасайық.</em>`,
+      'contact.email': `Хат жазу`,
+      'footer.l': `© 2026 Аяулым Саякова — Креатив-продюсер`,
+      'footer.r': `Астана, Қазақстан · <a href="#top">Жоғарыға ↑</a>`
+    },
+    ru: {
+      'meta.title': `Аяулым Саякова — Креатив-продюсер`,
+      'meta.desc': `Аяулым Саякова — креатив-продюсер и Performance Creative. UGC и AI-видеореклама, созданная для конверсии.`,
+      'meta.ogdesc': `Креатив-продюсер и Performance Creative: UGC, AI-видео и тестирование креативов.`,
+      'brand': `АЯУЛЫМ САЯКОВА`,
+      'nav.about': `Обо мне`,
+      'nav.skills': `Навыки`,
+      'nav.contact': `Контакты`,
+      'hero.eyebrow': `Креатив-продюсер · Performance Creative`,
+      'hero.h1': `Аяулым<br><span>Саякова</span>`,
+      'hero.lead': `Превращаю инсайты в UGC, AI-видео и статичную рекламу, которые останавливают скролл, а затем с помощью данных делаю следующую версию ещё сильнее.`,
+      'hero.r1': `UGC-реклама`,
+      'hero.r2': `AI-видео`,
+      'hero.r3': `Тестирование креативов`,
+      'hero.cta1': `Мои навыки`,
+      'hero.cta2': `Давайте поговорим`,
+      'about.h2': `Где креатив встречается с перформансом`,
+      'about.idx': `01 / Обо мне`,
+      'about.p1': `Я креатив-продюсер с <span class="hl">образованием в области Computer Science</span>. Соединяю творческое чутьё и аналитическое мышление в одном рабочем процессе.`,
+      'about.p2': `Мой опыт в привлечении пользователей через Meta помогает создавать <span class="hl">UGC, статичные и AI-сгенерированные рекламные креативы</span> на основе чётких хуков, структурированных тестов и метрик, которые подсказывают следующую итерацию.`,
+      'dt.loc': `Локация`,
+      'fact.loc': `Астана, Казахстан<small>Готова к удалённой работе</small>`,
+      'dt.focus': `Фокус`,
+      'fact.focus': `Performance Creative<small>UGC · AI-видео · статика</small>`,
+      'dt.plat': `Платформы`,
+      'fact.plat': `Meta Ads<small>UA и тестирование креативов</small>`,
+      'dt.edu': `Образование`,
+      'fact.edu': `B.Sc. Computer Science<small>Назарбаев Университет · 2026</small>`,
+      'dt.lang': `Языки`,
+      'fact.lang': `Английский · Казахский<small>Профессиональный · Родной</small>`,
+      'skills.h2': `Навыки и инструменты`,
+      'skills.idx': `02 / Навыки`,
+      'kit.perf': `Перформанс <span>UA</span>`,
+      'kit.creative': `Креатив <span>Продакшн</span>`,
+      'kit.design': `Дизайн и видео <span>Крафт</span>`,
+      'kit.ai': `AI и аналитика <span>Стек</span>`,
+      'c.ct': `Тестирование креативов`,
+      'c.ab': `A/B-тестирование`,
+      'c.opt': `Оптимизация кампаний`,
+      'c.ua': `Привлечение пользователей`,
+      'c.comp': `Анализ конкурентов`,
+      'c.hooks': `Хуки и углы подачи`,
+      'c.briefs': `Креативные брифы`,
+      'c.concepts': `Статичные и видеоконцепции`,
+      'c.iter': `Итерации`,
+      'contact.eyebrow': `Связаться`,
+      'contact.h2': `Давайте сделаем то,<br><em>что захочется смотреть.</em>`,
+      'contact.email': `Написать на почту`,
+      'footer.l': `© 2026 Аяулым Саякова — Креатив-продюсер`,
+      'footer.r': `Астана, Казахстан · <a href="#top">Наверх ↑</a>`
+    }
+  };
 
-  function buildGalleryDots(){
-    galleryDots.replaceChildren();
-    galleryImages.forEach((image, index) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'gallery-dot';
-      dot.setAttribute('aria-label', `Show gallery image ${index + 1}`);
-      dot.addEventListener('click', () => {
-        galleryIndex = index;
-        renderGallery();
-      });
-      galleryDots.appendChild(dot);
+  const i18nNodes = [...document.querySelectorAll('[data-i18n]')];
+  i18nNodes.forEach(n => { n.dataset.en = n.innerHTML; });
+
+  const metaTargets = [
+    { key:'meta.title',   el:document.querySelector('title'),                          attr:null },
+    { key:'meta.title',   el:document.querySelector('meta[property="og:title"]'),      attr:'content' },
+    { key:'meta.title',   el:document.querySelector('meta[name="twitter:title"]'),     attr:'content' },
+    { key:'meta.desc',    el:document.querySelector('meta[name="description"]'),       attr:'content' },
+    { key:'meta.ogdesc',  el:document.querySelector('meta[property="og:description"]'),attr:'content' },
+    { key:'meta.ogdesc',  el:document.querySelector('meta[name="twitter:description"]'),attr:'content' }
+  ];
+  metaTargets.forEach(m => { m.en = m.attr ? m.el.getAttribute(m.attr) : m.el.textContent; });
+
+  const langButtons = document.querySelectorAll('.lang [data-lang]');
+
+  function setLang(lang, persist){
+    if (!LANGS.includes(lang)) lang = 'en';
+    const dict = TR[lang] || {};
+    document.documentElement.lang = lang;
+    i18nNodes.forEach(n => {
+      n.innerHTML = (lang !== 'en' && dict[n.dataset.i18n]) || n.dataset.en;
     });
+    metaTargets.forEach(m => {
+      const v = (lang !== 'en' && dict[m.key]) || m.en;
+      if (m.attr) m.el.setAttribute(m.attr, v); else m.el.textContent = v;
+    });
+    langButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    if (persist){
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
   }
 
-  function renderGallery(){
-    galleryTitle.textContent = activeProject.dataset.galleryTitle;
-    galleryImage.src = galleryImages[galleryIndex];
-    galleryImage.alt = `${activeProject.dataset.galleryTitle} gallery image ${galleryIndex + 1}`;
-    galleryCounter.textContent = `${galleryIndex + 1} / ${galleryImages.length}`;
-    [...galleryDots.children].forEach((dot, index) => {
-      dot.setAttribute('aria-current', String(index === galleryIndex));
-    });
+  function initialLang(){
+    const q = new URLSearchParams(location.search).get('lang');
+    const fromQuery = ALIAS[q] || q;
+    if (LANGS.includes(fromQuery)) return fromQuery;
+    try {
+      const saved = localStorage.getItem('lang');
+      if (LANGS.includes(saved)) return saved;
+    } catch (e) {}
+    return 'en';
   }
 
-  function openGallery(project){
-    activeProject = project;
-    galleryImages = project.dataset.galleryImages.split('|').filter(Boolean);
-    galleryIndex = 0;
-    buildGalleryDots();
-    galleryControls.hidden = galleryImages.length === 1;
-    renderGallery();
-    gallery.showModal();
-  }
-
-  document.querySelectorAll('[data-gallery-title]').forEach(project => {
-    project.addEventListener('click', event => {
-      if (event.target.closest('a')) return;
-      openGallery(project);
-    });
-    project.addEventListener('keydown', event => {
-      if (event.target.closest('a')) return;
-      if (event.key === 'Enter' || event.key === ' '){
-        event.preventDefault();
-        openGallery(project);
-      }
-    });
-  });
-
-  document.getElementById('gallery-close').addEventListener('click', () => gallery.close());
-  document.getElementById('gallery-prev').addEventListener('click', () => {
-    galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
-    renderGallery();
-  });
-  document.getElementById('gallery-next').addEventListener('click', () => {
-    galleryIndex = (galleryIndex + 1) % galleryImages.length;
-    renderGallery();
-  });
-  gallery.addEventListener('click', event => {
-    if (!event.target.closest('.gallery-shell')) gallery.close();
-  });
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
+  setLang(initialLang(), false);
 
   // Scroll reveal
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
