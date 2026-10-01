@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,27 @@
 <meta name="twitter:title" content="Ayaulym Sayakova — Creative Producer" />
 <meta name="twitter:description" content="Creative Producer and Performance Creative specializing in UGC, AI video and creative testing." />
 <meta name="twitter:image" content="portfolio-assets/og.png" />
+
+<!-- Person / name SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Ayaulym Sayakova",
+    "alternateName": "Аяулым Саякова",
+    "jobTitle": "Creative Producer",
+    "url": "https://ayaulym-sayakova.github.io/portfolio/",
+    "sameAs": [
+      "https://www.linkedin.com/in/ayaulym-sayakova13/",
+      "https://github.com/ayaulym-sayakova"
+    ]
+  }
+}
+</script>
+
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EYBXGMVJ5F"></script>
 <script>
@@ -291,6 +313,17 @@
   footer .wrap{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; padding-block:26px; font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.03em; }
   footer a{ color:var(--on-dark-soft); }
   footer a:hover{ color:var(--on-dark); }
+  .footer-name-alt{
+    display:inline;
+    margin-left:6px;
+    opacity:.55;
+    font-size:.9em;
+  }
+  .footer-name-alt::before{
+    content:"/";
+    margin-right:6px;
+    opacity:.7;
+  }
 
   /* ---------- visual refresh ---------- */
   body{ background:#fff; }
@@ -653,7 +686,7 @@
 
     <footer>
       <div class="wrap">
-        <span data-i18n="footer.l">© 2026 Ayaulym Sayakova — Creative Producer</span>
+        <span data-i18n="footer.l">© 2026 Ayaulym Sayakova <span class="footer-name-alt">Аяулым Саякова</span> — Creative Producer</span>
         <span data-i18n="footer.r">Astana, Kazakhstan · <a href="#top">Back to top ↑</a></span>
       </div>
     </footer>
@@ -720,7 +753,7 @@
       'contact.eyebrow': `Байланысқа шығу`,
       'contact.h2': `Көруге тұрарлық<br><em>бір нәрсе жасайық.</em>`,
       'contact.email': `Хат жазу`,
-      'footer.l': `© 2026 Аяулым Саякова — Креатив-продюсер`,
+      'footer.l': `© 2026 Аяулым Саякова <span class="footer-name-alt">Ayaulym Sayakova</span> — Креатив-продюсер`,
       'footer.r': `Астана, Қазақстан · <a href="#top">Жоғарыға ↑</a>`
     },
     ru: {
@@ -771,7 +804,7 @@
       'contact.eyebrow': `Связаться`,
       'contact.h2': `Давайте сделаем то,<br><em>что захочется смотреть.</em>`,
       'contact.email': `Написать на почту`,
-      'footer.l': `© 2026 Аяулым Саякова — Креатив-продюсер`,
+      'footer.l': `© 2026 Аяулым Саякова <span class="footer-name-alt">Ayaulym Sayakova</span> — Креатив-продюсер`,
       'footer.r': `Астана, Казахстан · <a href="#top">Наверх ↑</a>`
     }
   };
